@@ -5,6 +5,7 @@ import { Component } from "@angular/core";
   templateUrl: "./fresh.page-text-box.component.html"
 })
 export class FreshPageTextBoxComponent {
-  showClearButton = true
+  placeholder = ""
+  allowClearButton = true
   constructor(){}
 }

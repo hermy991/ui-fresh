@@ -1,16 +1,21 @@
 import {Component, OnInit, Input, Renderer2} from '@angular/core';
 
 @Component({
-  selector: "fresh-text-box",
-  templateUrl: "./fresh.text-box.component.html",
-  styleUrls: ["./fresh.text-box.component.css"]
+  selector: "fresh-number-box",
+  templateUrl: "./fresh.number-box.component.html",
+  styleUrls: ["./fresh.number-box.component.css"]
 })
-export class FreshTextBoxComponent implements OnInit {
+export class FreshNumberBoxComponent implements OnInit {
   /** Inputs & Outputs */
   @Input() type = "text" // password, email, number
   @Input() placeholder = ""
   @Input() allowClearButton = false
+  @Input() allowSpinButtons = false
   @Input() value = ""
+  @Input() min = undefined
+  @Input() max = undefined
+  @Input() format = ""
+  @Input() reverse = false;
 
   /** Attributes */
   showError = false
@@ -25,6 +30,6 @@ export class FreshTextBoxComponent implements OnInit {
 
   onHighlightOff(){
     this.value = ""
-    setTimeout(() => this.render.selectRootElement(".fresh-text-box").focus(), 0)
+    setTimeout(() => this.render.selectRootElement(".fresh-number-box").focus(), 0)
   }
 }

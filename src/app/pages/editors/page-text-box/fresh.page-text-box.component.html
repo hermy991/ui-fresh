@@ -1,1 +1,22 @@
-<fresh-text-box [showClearButton]="showClearButton"></fresh-text-box>
+<label for="">placeholder</label>
+<input type="text" [value]="placeholder" (input)="placeholder = $event.target.value">
+
+<div class="fresh-field">
+  <div class="fresh-value">
+    <fresh-text-box [allowClearButton]="allowClearButton" [placeholder]="placeholder">
+    </fresh-text-box>
+  </div>
+</div>
+<div class="fresh-field">
+  <div class="fresh-value">
+    <fresh-text-box [allowClearButton]="allowClearButton" [placeholder]="placeholder" type="password">
+    </fresh-text-box>
+  </div>
+</div>
+<div class="fresh-field">
+  <div class="fresh-value">
+    <fresh-text-box [allowClearButton]="allowClearButton" [placeholder]="placeholder" type="password">
+    </fresh-text-box>
+  </div>
+</div>
+
