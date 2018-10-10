@@ -1,10 +1,35 @@
-<label for="">placeholder</label>
-<input type="text" [value]="placeholder" (input)="placeholder = $event.target.value">
-
 <div class="fresh-field">
   <div class="fresh-value">
     <fresh-number-box
-      [allowClearButton]="allowClearButton" [placeholder]="placeholder">
+      [allowClearButton]="allowClearButton" placeholder="#,#.#" format="#,#.#">
+    </fresh-number-box>
+  </div>
+</div>
+<div class="fresh-field">
+  <div class="fresh-value">
+    <fresh-number-box
+      [allowClearButton]="allowClearButton" placeholder="#,#.00" format="#,#.00">
+    </fresh-number-box>
+  </div>
+</div>
+<div class="fresh-field">
+  <div class="fresh-value">
+    <fresh-number-box
+      [allowClearButton]="allowClearButton" placeholder="#,0.00" format="#,0.00">
+    </fresh-number-box>
+  </div>
+</div>
+<div class="fresh-field">
+  <div class="fresh-value">
+    <fresh-number-box
+      [allowClearButton]="allowClearButton" placeholder="#,0.0000" format="#,0.0000">
+    </fresh-number-box>
+  </div>
+</div>
+<div class="fresh-field">
+  <div class="fresh-value">
+    <fresh-number-box
+      [allowClearButton]="allowClearButton" placeholder="" format="">
     </fresh-number-box>
   </div>
 </div>

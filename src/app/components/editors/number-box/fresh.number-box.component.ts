@@ -1,4 +1,5 @@
 import {Component, OnInit, Input, Renderer2} from '@angular/core';
+import { FreshNumberBoxUtility } from './fresh.number-box.utility';
 
 @Component({
   selector: "fresh-number-box",
@@ -11,10 +12,10 @@ export class FreshNumberBoxComponent implements OnInit {
   @Input() placeholder = ""
   @Input() allowClearButton = false
   @Input() allowSpinButtons = false
-  @Input() value = ""
+  @Input() value = undefined
   @Input() min = undefined
   @Input() max = undefined
-  @Input() format = ""
+  @Input() format = "" //
   @Input() reverse = false;
 
   /** Attributes */
@@ -24,12 +25,20 @@ export class FreshNumberBoxComponent implements OnInit {
   showHelp = false
   showSearch = false
   showRefresh = false
+  get numberBoxInput(){ return this.render.selectRootElement(".fresh-number-box") }
+  get formatNumber() {return FreshNumberBoxUtility.formattingNumber(123456.789, this.format)}
+
 
   constructor(public render: Renderer2){}
   ngOnInit(){}
 
   onHighlightOff(){
     this.value = ""
-    setTimeout(() => this.render.selectRootElement(".fresh-number-box").focus(), 0)
+    setTimeout(() => this.numberBoxInput.focus(), 0)
+  }
+  onKeydown(event){
+    let currentKey = event.key
+    
+    console.log({currentKey})
   }
 }

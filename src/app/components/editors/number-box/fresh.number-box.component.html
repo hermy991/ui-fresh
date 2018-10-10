@@ -1,7 +1,6 @@
 <input [type]="type" class="fresh-number-box" autocomplete="off"
        [placeholder]="placeholder"
-       [value]="value"
-       (input)="value = $event.target.value">
+       (keydown)="onKeydown($event)">
 <i *ngIf="showAdd" class="material-icons ">add</i>
 <i *ngIf="showRefresh" class="material-icons ">refresh</i>
 <i *ngIf="showCalendar" class="material-icons">today</i>
@@ -9,4 +8,5 @@
 
 <i *ngIf="showHelp" class="material-icons">help_outline</i>
 <i *ngIf="showError" class="material-icons">error_outline</i>
-<i *ngIf="allowClearButton && value != ''" class="material-icons" (click)="onHighlightOff()">highlight_off</i>
+<i *ngIf="allowClearButton && (value >= 0 || value < 0)" class="material-icons" (click)="onHighlightOff()">highlight_off</i>
+asdfasdfasdf
