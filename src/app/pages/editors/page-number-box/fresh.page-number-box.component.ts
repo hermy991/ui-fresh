@@ -5,6 +5,7 @@ import { Component } from "@angular/core";
   templateUrl: "./fresh.page-number-box.component.html"
 })
 export class FreshPageNumberBoxComponent {
+  value = undefined;
   placeholder = ""
   allowClearButton = true
   constructor(){}

@@ -1,12 +1,18 @@
-<input [type]="type" class="fresh-number-box" autocomplete="off"
+<input type="text" class="fresh-number-box" autocomplete="off" 
        [placeholder]="placeholder"
-       (keydown)="onKeydown($event)">
-<i *ngIf="showAdd" class="material-icons ">add</i>
-<i *ngIf="showRefresh" class="material-icons ">refresh</i>
-<i *ngIf="showCalendar" class="material-icons">today</i>
-<i *ngIf="showSearch" class="material-icons">search</i>
+       [disabled]="gdisabled"
+       [readonly]="greadOnly"
+       [ngStyle]="{'textAlign':textAlign}"
+       (keydown)="onKeydown($event)"
+       (focus)="onFocus()"
+       (blur)="onBlur()"
+       (keyup)="onKeyup()">
+<i *ngIf="showAdd" class="material-icons " [ngClass]="giconClass">add</i>
+<i *ngIf="showRefresh" class="material-icons" [ngClass]="giconClass">refresh</i>
+<i *ngIf="showSearch" class="material-icons" [ngClass]="giconClass">search</i>
 
-<i *ngIf="showHelp" class="material-icons">help_outline</i>
-<i *ngIf="showError" class="material-icons">error_outline</i>
-<i *ngIf="allowClearButton && (value >= 0 || value < 0)" class="material-icons" (click)="onHighlightOff()">highlight_off</i>
-asdfasdfasdf
+<i *ngIf="showHelp" class="material-icons" [ngClass]="giconClass">help_outline</i>
+<i *ngIf="showError" class="material-icons" [ngClass]="giconClass">error_outline</i>
+<i *ngIf="gshowClearButton && (value >= 0 || value < 0) && !(gdisabled || greadOnly)" class="material-icons" 
+  [ngClass]="giconClass"
+  (click)="onHighlightOff()">highlight_off</i>

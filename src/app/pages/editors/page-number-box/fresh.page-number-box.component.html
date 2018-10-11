@@ -1,35 +1,78 @@
+<input type="text" [value]="value || ''" (input)="value = $event.target.value">
 <div class="fresh-field">
   <div class="fresh-value">
     <fresh-number-box
-      [allowClearButton]="allowClearButton" placeholder="#,#.#" format="#,#.#">
+      [showClearButton]="allowClearButton" placeholder="" format="" [value]="value">
     </fresh-number-box>
   </div>
 </div>
 <div class="fresh-field">
   <div class="fresh-value">
     <fresh-number-box
-      [allowClearButton]="allowClearButton" placeholder="#,#.00" format="#,#.00">
+      [showClearButton]="allowClearButton" placeholder="#,#.#" format="#,#.#" selectInFocus [value]="value">
     </fresh-number-box>
   </div>
 </div>
 <div class="fresh-field">
   <div class="fresh-value">
     <fresh-number-box
-      [allowClearButton]="allowClearButton" placeholder="#,0.00" format="#,0.00">
+      [showClearButton]="allowClearButton" placeholder="#,#.00" format="#,#.00" selectInFocus [value]="value">
     </fresh-number-box>
   </div>
 </div>
 <div class="fresh-field">
   <div class="fresh-value">
     <fresh-number-box
-      [allowClearButton]="allowClearButton" placeholder="#,0.0000" format="#,0.0000">
+      [showClearButton]="allowClearButton" placeholder="#,0.00" format="#,0.00">
     </fresh-number-box>
   </div>
 </div>
 <div class="fresh-field">
   <div class="fresh-value">
     <fresh-number-box
-      [allowClearButton]="allowClearButton" placeholder="" format="">
+      [showClearButton]="allowClearButton" placeholder="#,0.0000" format="#,0.0000">
+    </fresh-number-box>
+  </div>
+</div>
+<div class="fresh-field">
+  <div class="fresh-value">
+    <fresh-number-box
+      [showClearButton]="allowClearButton" placeholder="(#,#.00)" format="(#,#.00)">
+    </fresh-number-box>
+  </div>
+</div>
+<div class="fresh-field">
+  <div class="fresh-value">
+    <fresh-number-box
+      [showClearButton]="allowClearButton" placeholder="(#,#.00)" format="(#,#.00)">
+    </fresh-number-box>
+  </div>
+</div>
+<div class="fresh-field">
+  <div class="fresh-value">
+    <fresh-number-box
+      [showClearButton]="allowClearButton" placeholder="$#,#.00" format="$#,#.00">
+    </fresh-number-box>
+  </div>
+</div>
+<div class="fresh-field">
+  <div class="fresh-value">
+    <fresh-number-box
+      [showClearButton]="allowClearButton" placeholder="$ (#,#.00)" format="$ (#,#.00)">
+    </fresh-number-box>
+  </div>
+</div>
+<div class="fresh-field">
+  <div class="fresh-value">
+    <fresh-number-box
+      [showClearButton]="allowClearButton" placeholder="#,#.00-" format="#,#.00-" value="-15000" disabled>
+    </fresh-number-box>
+  </div>
+</div>
+<div class="fresh-field">
+  <div class="fresh-value">
+    <fresh-number-box
+      [showClearButton]="allowClearButton" placeholder="#,#.00-" format="#,#.00-" value="3500.30" readOnly>
     </fresh-number-box>
   </div>
 </div>

@@ -18,5 +18,13 @@ i.material-icons{
   position: relative;
   float: right;
   top: 1px;
-  right: 2px;
 }
+i.material-icons.right{
+  float: right;
+  left: 2px;
+}
+i.material-icons.left{
+  float: left;
+  left: 2px;
+}
+
