@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Renderer2} from '@angular/core';
+import {Component, OnInit, Input, Renderer2, ElementRef} from '@angular/core';
 import { FreshGlobal } from 'src/app/core/fresh.global.untility';
 
 @Component({
@@ -12,6 +12,7 @@ export class FreshTextBoxComponent implements OnInit {
   @Input() placeholder = ""
   @Input() allowClearButton = false
   @Input() value = ""
+  @Input() mask = undefined
 
   /** Attributes */
   showError = false
@@ -31,14 +32,32 @@ export class FreshTextBoxComponent implements OnInit {
         pattern: this.mask
       }
   }
+  get gtextBoxInput(){ return this.el.nativeElement.querySelector(".fresh-text-box")}
   get gpattern() {return this.gmask ? this.gmask.pattern : undefined}
   get gplaceholder() {return this.gmask ? this.gmask.placeholder : ""}
 
-  constructor(public render: Renderer2){}
+  constructor(private el: ElementRef){}
   ngOnInit(){}
+
+  
+  onKeydown(event){
+    let currentKey = event.key.toLowerCase()
+    let el = this.gtextBoxInput;
+    if("." == currentKey && el.value.includes(currentKey)){
+      event.preventDefault()
+    }
+    else if("-" == currentKey && el.selectionStart > 0){
+      event.preventDefault()
+    }
+    else if(!["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-",
+      "backspace", "delete", "arrowleft", "arrowright", "arrowright", "tab", "enter", "home", "end"].some(x=> (x + "").toLowerCase() == currentKey)){
+      event.preventDefault()
+    }
+    console.log({currentKey})
+  }
 
   onHighlightOff(){
     this.value = ""
-    setTimeout(() => this.render.selectRootElement(".fresh-text-box").focus(), 0)
+    setTimeout(() => {this.gtextBoxInput.value = ""; this.gtextBoxInput.focus()}, 0)
   }
 }

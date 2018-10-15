@@ -1,5 +1,4 @@
 import {Component, OnInit, Input, ElementRef, EventEmitter, Output, SimpleChanges, OnChanges} from '@angular/core';
-import { FreshNumberBoxUtility } from './fresh.number-box.utility';
 import * as numeral from "numeral"
 
 @Component({
