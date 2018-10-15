@@ -1,4 +1,5 @@
 import {Component, OnInit, Input, Renderer2} from '@angular/core';
+import { FreshGlobal } from 'src/app/core/fresh.global.untility';
 
 @Component({
   selector: "fresh-text-box",
@@ -19,6 +20,19 @@ export class FreshTextBoxComponent implements OnInit {
   showHelp = false
   showSearch = false
   showRefresh = false
+
+  get gmask() { 
+    if((this.mask || "") == "")
+      return undefined;
+    if(FreshGlobal.isJsonString(this.mask))
+      return JSON.parse(this.mask)
+    if(this.mask.constructor == String)
+      return {
+        pattern: this.mask
+      }
+  }
+  get gpattern() {return this.gmask ? this.gmask.pattern : undefined}
+  get gplaceholder() {return this.gmask ? this.gmask.placeholder : ""}
 
   constructor(public render: Renderer2){}
   ngOnInit(){}
