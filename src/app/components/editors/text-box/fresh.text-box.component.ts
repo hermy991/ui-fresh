@@ -12,7 +12,11 @@ export class FreshTextBoxComponent implements OnInit {
   @Input() placeholder = ""
   @Input() allowClearButton = false
   @Input() value = ""
-  @Input() mask = undefined
+  @Input() maskOptions = { 
+    mask: ["1+ (", /[\d]/, /[\d]/, /[\d]/, ") ", /[\d]/, /[\d]/, /[\d]/, " - ", /[\d]/, /[\d]/, /[\d]/, /[\d]/ ],
+    placeholder: "_",
+    hideBlur: false,
+  }
 
   /** Attributes */
   showError = false
@@ -22,42 +26,43 @@ export class FreshTextBoxComponent implements OnInit {
   showSearch = false
   showRefresh = false
 
-  get gmask() { 
-    if((this.mask || "") == "")
-      return undefined;
-    if(FreshGlobal.isJsonString(this.mask))
-      return JSON.parse(this.mask)
-    if(this.mask.constructor == String)
-      return {
-        pattern: this.mask
-      }
-  }
-  get gtextBoxInput(){ return this.el.nativeElement.querySelector(".fresh-text-box")}
-  get gpattern() {return this.gmask ? this.gmask.pattern : undefined}
-  get gplaceholder() {return this.gmask ? this.gmask.placeholder : ""}
+  get gtextBoxInput() { return this.el.nativeElement.querySelector(".fresh-text-box")}
+  get gmask() { return FreshGlobal.getMaskFilter(this.maskOptions.mask); }
+  get gplaceholder() { return this.maskOptions && this.maskOptions.placeholder ? this.maskOptions.placeholder : "_"}
+  get ghideBlur() { return this.maskOptions && this.maskOptions.hideBlur ? this.maskOptions.hideBlur : false}
 
   constructor(private el: ElementRef){}
-  ngOnInit(){}
 
-  
+  ngOnInit(){
+    let mask = this.gmask
+    let maskDisplay = "";
+    for(let maskTemp of mask){
+      if(maskTemp.constructor == String)
+        maskDisplay += maskTemp
+      else
+        maskDisplay += this.gplaceholder
+    }
+    this.gtextBoxInput.value = maskDisplay
+  }
+ 
   onKeydown(event){
-    let currentKey = event.key.toLowerCase()
-    let el = this.gtextBoxInput;
-    if("." == currentKey && el.value.includes(currentKey)){
-      event.preventDefault()
-    }
-    else if("-" == currentKey && el.selectionStart > 0){
-      event.preventDefault()
-    }
-    else if(!["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-",
-      "backspace", "delete", "arrowleft", "arrowright", "arrowright", "tab", "enter", "home", "end"].some(x=> (x + "").toLowerCase() == currentKey)){
-      event.preventDefault()
-    }
-    console.log({currentKey})
+    // let currentKey = event.key.toLowerCase()
+    // let el = this.gtextBoxInput;
+    // if("." == currentKey && el.value.includes(currentKey)){
+    //   event.preventDefault()
+    // }
+    // else if("-" == currentKey && el.selectionStart > 0){
+    //   event.preventDefault()
+    // }
+    // else if(!["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", ".", "-",
+    //   "backspace", "delete", "arrowleft", "arrowright", "arrowright", "tab", "enter", "home", "end"].some(x=> (x + "").toLowerCase() == currentKey)){
+    //   event.preventDefault()
+    // }
+    // console.log({currentKey})
   }
 
   onHighlightOff(){
-    this.value = ""
-    setTimeout(() => {this.gtextBoxInput.value = ""; this.gtextBoxInput.focus()}, 0)
+     this.value = ""
+     setTimeout(() => {this.gtextBoxInput.value = ""; this.gtextBoxInput.focus()}, 0)
   }
 }
