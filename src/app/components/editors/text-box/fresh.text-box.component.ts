@@ -28,6 +28,8 @@ export class FreshTextBoxComponent implements OnInit {
 
   get gtextBoxInput() { return this.el.nativeElement.querySelector(".fresh-text-box")}
   get gmask() { return FreshGlobal.getMaskFilter(this.maskOptions.mask); }
+  get gvalue() { return FreshGlobal.getMaskValue(this.gfocusAllow, this.gtextBoxInput.value, this.gplaceholder); }
+  get gfocusAllow() { return this.gmask.map(x => x.constructor === RegExp) }
   get gplaceholder() { return this.maskOptions && this.maskOptions.placeholder ? this.maskOptions.placeholder : "_"}
   get ghideBlur() { return this.maskOptions && this.maskOptions.hideBlur ? this.maskOptions.hideBlur : false}
 
@@ -46,7 +48,8 @@ export class FreshTextBoxComponent implements OnInit {
   }
  
   onKeydown(event){
-    // let currentKey = event.key.toLowerCase()
+    let currentKey = event.key.toLowerCase()
+    
     // let el = this.gtextBoxInput;
     // if("." == currentKey && el.value.includes(currentKey)){
     //   event.preventDefault()
@@ -59,6 +62,29 @@ export class FreshTextBoxComponent implements OnInit {
     //   event.preventDefault()
     // }
     // console.log({currentKey})
+  }
+
+  onFocus(event){
+    let t = this.gtextBoxInput
+    /** Redirect Focus */
+    let arrayFocus = this.gmask.map(x=> x.constructor == RegExp)
+    let filedFocus = t.value.split("")
+    let arrayResult = arrayFocus
+      .map((x, index)=> ({ index, value: index < filedFocus.length ? filedFocus[index] : "", allow: x}))
+      .filter(x => x.allow && x.value === this.gplaceholder)
+    debugger
+    if(arrayResult.length){
+      let index = arrayResult.filter((x, index)=> index == 0)
+      //event.target.setSelectionRange(index, index)
+      console.log(event.currentTarget.selectionStart, event.currentTarget.selectionEnd)
+      //event. .selectionStart = t.selectionEnd = index
+    }
+    // let positionObject = arrayResult.find(x => {
+    //   if(x.value === this.gplaceholder && x.allow)
+    //     return true
+    //   return false
+    // })
+
   }
 
   onHighlightOff(){

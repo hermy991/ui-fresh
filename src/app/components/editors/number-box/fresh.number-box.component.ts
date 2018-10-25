@@ -96,7 +96,6 @@ export class FreshNumberBoxComponent implements OnChanges {
       "backspace", "delete", "arrowleft", "arrowright", "arrowright", "tab", "enter", "home", "end"].some(x=> (x + "").toLowerCase() == currentKey)){
       event.preventDefault()
     }
-    console.log({currentKey})
   }
 
   onFocus(){

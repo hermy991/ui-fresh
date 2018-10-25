@@ -19,5 +19,11 @@ export class FreshGlobal{
 		};
 		return tempMask;
 	}
-
+  public static getMaskValue(focusAllow:Array<boolean>, value: string, placeholder: string){
+		debugger
+		return focusAllow.map((x, index) => ({index, value: x}))
+			.filter( x => x.value)
+			.map(x=> value[x.index])
+			.join("") 
+	}
 }

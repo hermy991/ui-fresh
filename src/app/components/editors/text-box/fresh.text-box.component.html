@@ -1,6 +1,7 @@
 <input [type]="text" class="fresh-text-box" autocomplete="off"
        [placeholder]="placeholder"
-       (keydown)="onKeydown($event)">
+       (keydown)="onKeydown($event)"
+       (focus)="onFocus($event)">
 <i *ngIf="showAdd" class="material-icons ">add</i>
 <i *ngIf="showRefresh" class="material-icons ">refresh</i>
 <i *ngIf="showCalendar" class="material-icons">today</i>
